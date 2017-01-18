@@ -1,0 +1,28 @@
+{
+  "name": "167491-kekstagram",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Личный проект «Кекстаграм» от HTML Academy",
+  "author": "Альбина Токарчук",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:htmlacademy-javascript/167491-kekstagram.git"
+  },
+  "bugs": {
+    "url": "https://github.com/htmlacademy-javascript/167491-kekstagram/issues"
+  },
+  "homepage": "https://github.com/htmlacademy-javascript/167491-kekstagram",
+  "devDependencies": {
+    "eslint": "3.9.0",
+    "eslint-config-htmlacademy": "0.2.x",
+    "eslint-plugin-requirejs": "2.0.1"
+  },
+  "dependencies": {},
+  "scripts": {
+    "test": "esint js/"
+  },
+  "engines": {
+    "node": "^6.9"
+  },
+  "openBrowser": false
+}
