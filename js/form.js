@@ -47,22 +47,22 @@ var resizePhoto = function () {
 
     resizeVal = resizeVal.substring(0, resizeVal.length - 1);
 
-    if (event.target == dec) {
+    if (event.target === dec) {
       resizeVal = +resizeVal - step;
 
       if (resizeVal < min) {
-        resizeVal = min
+        resizeVal = min;
       }
 
-    } else if (event.target == inc) {
+    } else if (event.target === inc) {
       resizeVal = +resizeVal + step;
 
       if (resizeVal > max) {
-        resizeVal = max
+        resizeVal = max;
       }
     }
 
-    if (resizeVal == max) {
+    if (resizeVal === max) {
       mainPhoto.style.transform = 'scale(1)';
     } else {
       mainPhoto.style.transform = 'scale(0.' + resizeVal + ')';
