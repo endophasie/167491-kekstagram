@@ -133,6 +133,18 @@ body {
           filter: invert(100%);
 }
 
+ .upload-filter-label-phobos .upload-filter-preview,
+ .filter-phobos {
+   -webkit-filter: contrast(1.6) grayscale(1) sepia(0.3);
+           filter: contrast(1.6) grayscale(1) sepia(0.3);
+ }
+
+.upload-filter-label-heat .upload-filter-preview,
+.filter-heat {
+  -webkit-filter: brightness(1.2) opacity(0.8) sepia(0.5);
+          filter: brightness(1.2) opacity(0.8) sepia(0.5);
+}
+
 .upload-input {
   visibility: hidden;
 }
@@ -277,6 +289,8 @@ body {
 
 .filter-image-preview {
   vertical-align: middle;
+  -webkit-transition: transform .3s ease;
+          transition: transform .3s ease;
 }
 
 .upload-filter-controls input[type=radio] {
