@@ -5,21 +5,23 @@ var uploadField = uploadForm.querySelector('#upload-file');
 var filterFormContainer = document.querySelector('.upload-overlay');
 var closeFilterForm = filterFormContainer.querySelector('.upload-form-cancel');
 var mainPhoto = filterFormContainer.querySelector('.filter-image-preview');
-var flag;
+var isFilterFormOpened;
 
 var changeForms = function () {
-  if (flag) {
+  if (isFilterFormOpened) {
     uploadForm.classList.remove('invisible');
     filterFormContainer.classList.add('invisible');
-    flag = false;
+
+    isFilterFormOpened = false;
   } else {
     uploadForm.classList.add('invisible');
     filterFormContainer.classList.remove('invisible');
-    flag = true;
+
+    isFilterFormOpened = true;
   }
 };
 
-var toggleFilter = function () {
+var initFilterHandlers = function () {
   var elems = document.getElementsByName('upload-filter');
 
   for (var i = 0; i < elems.length; i++) {
@@ -29,12 +31,12 @@ var toggleFilter = function () {
       var name = event.target.id.substring(7);
 
       mainPhoto.classList = '';
-      mainPhoto.classList.add(name);
+      mainPhoto.classList.add('filter-image-preview', name);
     });
   }
 };
 
-var resizePhoto = function () {
+var initPhotoControls = function () {
   var dec = filterFormContainer.querySelector('.upload-resize-controls-button-dec');
   var inc = filterFormContainer.querySelector('.upload-resize-controls-button-inc');
   var resizeField = filterFormContainer.querySelector('.upload-resize-controls-value');
@@ -45,17 +47,18 @@ var resizePhoto = function () {
     var max = 100;
     var step = 25;
 
-    resizeVal = resizeVal.substring(0, resizeVal.length - 1);
+    if (typeof(resizeVal) == 'string') {
+      resizeVal = resizeVal.substring(0, resizeVal.length - 1);
+    }
 
     if (event.target === dec) {
-      resizeVal = +resizeVal - step;
-
+      resizeVal = Number(resizeVal) - step;
       if (resizeVal < min) {
         resizeVal = min;
       }
 
     } else if (event.target === inc) {
-      resizeVal = +resizeVal + step;
+      resizeVal = Number(resizeVal) + step;
 
       if (resizeVal > max) {
         resizeVal = max;
@@ -68,9 +71,7 @@ var resizePhoto = function () {
       mainPhoto.style.transform = 'scale(0.' + resizeVal + ')';
     }
 
-    resizeVal += '%';
-    resizeField.value = resizeVal;
-
+    resizeField.value = resizeVal + '%';
   };
 
   dec.addEventListener('click', changeVal);
@@ -80,5 +81,5 @@ var resizePhoto = function () {
 uploadField.addEventListener('change', changeForms);
 closeFilterForm.addEventListener('click', changeForms);
 
-toggleFilter();
-resizePhoto();
+initFilterHandlers();
+initPhotoControls();
