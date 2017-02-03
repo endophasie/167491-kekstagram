@@ -47,7 +47,7 @@ var initPhotoControls = function () {
     var max = 100;
     var step = 25;
 
-    if (typeof(resizeVal) == 'string') {
+    if (typeof (resizeVal) === 'string') {
       resizeVal = resizeVal.substring(0, resizeVal.length - 1);
     }
 
