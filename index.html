@@ -26,12 +26,12 @@
     <button class="upload-submit upload-control" type="submit"></button>
   </form>
 
-  <div class="upload-overlay invisible">
+  <div class="upload-overlay invisible" role="widget" tabindex="0">
     <form class="upload-form upload-filter" id="upload-filter" method="post" enctype="multipart/form-data">
       <fieldset class="upload-resize-controls">
-        <button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-dec">–</button><!--
-        --><input type="text" class="upload-resize-control upload-resize-controls-value" value="100%" readonly /><!--
-        --><button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-inc">+</button>
+        <button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-dec" tabindex="0">–</button><!--
+        --><input type="text" class="upload-resize-control upload-resize-controls-value" value="100%" readonly aria-readonly="true" /><!--
+        --><button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-inc" tabindex="0">+</button>
       </fieldset>
 
       <div class="upload-form-preview">
@@ -48,46 +48,46 @@
         </div>
 
         <input type="radio" name="upload-filter" id="upload-filter-none" value="none" checked>
-        <label class="upload-filter-label" for="upload-filter-none">
+        <label class="upload-filter-label" for="upload-filter-none" tabindex="0">
           <div class="upload-filter-preview"></div>
           Оригинал
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-chrome" value="chrome">
-        <label class="upload-filter-label upload-filter-label-chrome" for="upload-filter-chrome">
+        <label class="upload-filter-label upload-filter-label-chrome" for="upload-filter-chrome" tabindex="0">
           <div class="upload-filter-preview"></div>
           Хром
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-sepia" value="sepia">
-        <label class="upload-filter-label upload-filter-label-sepia" for="upload-filter-sepia">
+        <label class="upload-filter-label upload-filter-label-sepia" for="upload-filter-sepia" tabindex="0">
           <div class="upload-filter-preview"></div>
           Сепия
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-marvin" value="marvin">
-        <label class="upload-filter-label upload-filter-label-marvin" for="upload-filter-marvin">
+        <label class="upload-filter-label upload-filter-label-marvin" for="upload-filter-marvin" tabindex="0">
           <div class="upload-filter-preview"></div>
           Марвин
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-phobos" value="phobos">
-        <label class="upload-filter-label upload-filter-label-phobos" for="upload-filter-phobos">
+        <label class="upload-filter-label upload-filter-label-phobos" for="upload-filter-phobos" tabindex="0">
           <div class="upload-filter-preview"></div>
           Фобос
         </label>
 
         <input type="radio" name="upload-filter" id="upload-filter-heat" value="heat">
-        <label class="upload-filter-label upload-filter-label-heat" for="upload-filter-heat">
+        <label class="upload-filter-label upload-filter-label-heat" for="upload-filter-heat" tabindex="0">
           <div class="upload-filter-preview"></div>
           Зной
         </label>
       </fieldset>
 
-      <textarea class="upload-form-description" name="upload-description" placeholder="Ваш комментарий..."></textarea>
+      <textarea class="upload-form-description" name="upload-description" placeholder="Ваш комментарий..." tabindex="2"></textarea>
 
-      <button class="upload-form-cancel" type="reset" id="upload-cancel"></button>
-      <button class="upload-form-submit" type="submit" id="upload-submit">Отправить</button>
+      <button class="upload-form-cancel" type="reset" id="upload-cancel" tabindex="0" aria-label="Close"></button>
+      <button class="upload-form-submit" type="submit" id="upload-submit" tabindex="2">Отправить</button>
     </form>
   </div>
 

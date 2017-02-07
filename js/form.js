@@ -7,6 +7,9 @@ var closeFilterForm = filterFormContainer.querySelector('.upload-form-cancel');
 var mainPhoto = filterFormContainer.querySelector('.filter-image-preview');
 var isFilterFormOpened;
 
+var ESCAPE_KEY = 27;
+var ENTER_KEY = 13;
+
 var changeForms = function () {
   if (isFilterFormOpened) {
     uploadForm.classList.remove('invisible');
@@ -22,18 +25,34 @@ var changeForms = function () {
 };
 
 var initFilterHandlers = function () {
-  var elems = document.getElementsByName('upload-filter');
+  var formControls = filterFormContainer.querySelector('.upload-filter-controls');
 
-  for (var i = 0; i < elems.length; i++) {
-    var elem = elems[i];
+  var setMainPhotoFilter = function (name) {
+    mainPhoto.classList = '';
+    mainPhoto.classList.add('filter-image-preview', name);
+  };
 
-    elem.addEventListener('click', function (event) {
-      var name = event.target.id.substring(7);
+  formControls.addEventListener('click', function (event) {
+    if (event.target.getAttribute('name', 'upload-filter')) {
+      var radioName = event.target.id.substring(7);
 
-      mainPhoto.classList = '';
-      mainPhoto.classList.add('filter-image-preview', name);
-    });
-  }
+      setMainPhotoFilter(radioName);
+    }
+  }, true);
+
+  formControls.addEventListener('keydown', function (event) {
+    if (event.keyCode === ENTER_KEY) {
+      var filterName = event.target.getAttribute('for');
+
+      setMainPhotoFilter(filterName);
+    }
+  }, true);
+
+  filterFormContainer.addEventListener('keydown', function (event) {
+    if (event.keyCode === ESCAPE_KEY && isFilterFormOpened) {
+      changeForms();
+    }
+  });
 };
 
 var initPhotoControls = function () {
@@ -80,6 +99,7 @@ var initPhotoControls = function () {
 
 uploadField.addEventListener('change', changeForms);
 closeFilterForm.addEventListener('click', changeForms);
+
 
 initFilterHandlers();
 initPhotoControls();

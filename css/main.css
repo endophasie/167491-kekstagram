@@ -69,7 +69,6 @@ body {
   width: 582px;
   height: 569px;
   margin: 5px 0 0 -291px;
-  margin-top: 5px;
   padding: 0;
 
   background: url("../img/logo-background-1.jpg") center;
@@ -251,6 +250,10 @@ body {
 
 .upload-resize-controls-button:active {
   transform: translateY(1px);
+}
+
+.upload-resize-controls-button:focus {
+  outline: 1px solid deepskyblue;
 }
 
 .upload-resize-controls-button-dec {
