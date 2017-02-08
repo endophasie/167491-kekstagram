@@ -28,29 +28,35 @@ var initFilterHandlers = function () {
   var formControls = filterFormContainer.querySelector('.upload-filter-controls');
 
   var setMainPhotoFilter = function (name) {
+    name = name.replace('upload-', '');
+
     mainPhoto.classList = '';
     mainPhoto.classList.add('filter-image-preview', name);
   };
 
   formControls.addEventListener('click', function (event) {
     if (event.target.getAttribute('name', 'upload-filter')) {
-      var radioName = event.target.id.substring(7);
+      var radioName = event.target.id;
 
       setMainPhotoFilter(radioName);
     }
   }, true);
 
   formControls.addEventListener('keydown', function (event) {
-    if (event.keyCode === ENTER_KEY) {
-      var filterName = event.target.getAttribute('for');
+    switch (event.keyCode) {
+      case ENTER_KEY :
+        var filterName = event.target.getAttribute('for');
+        var radioFilter = formControls.querySelector('#' + filterName);
 
-      setMainPhotoFilter(filterName);
+        radioFilter.setAttribute('checked', true);
+        setMainPhotoFilter(filterName);
     }
   }, true);
 
   filterFormContainer.addEventListener('keydown', function (event) {
-    if (event.keyCode === ESCAPE_KEY && isFilterFormOpened) {
-      changeForms();
+    switch (event.keyCode) {
+      case ESCAPE_KEY :
+        changeForms();
     }
   });
 };
