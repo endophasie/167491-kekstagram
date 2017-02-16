@@ -1,13 +1,17 @@
+'use strict';
+
 window.initializeFilters = function () {
-  var formControls = filterFormContainer.querySelector('.upload-filter-controls');
+  var formControls = document.querySelector('.upload-filter-controls');
 
   var ENTER_KEY = 13;
 
   var setMainPhotoFilter = function (name) {
+    var mainPhotoFilter = document.querySelector('.filter-image-preview');
+
     name = name.replace('upload-', '');
 
-    mainPhoto.classList = '';
-    mainPhoto.classList.add('filter-image-preview', name);
+    mainPhotoFilter.classList = '';
+    mainPhotoFilter.classList.add('filter-image-preview', name);
   };
 
   formControls.addEventListener('click', function (event) {

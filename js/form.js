@@ -5,7 +5,6 @@ var uploadField = uploadForm.querySelector('#upload-file');
 var filterFormContainer = document.querySelector('.upload-overlay');
 var scaleContainer = document.querySelector('.upload-resize-controls');
 var closeFilterForm = filterFormContainer.querySelector('.upload-form-cancel');
-var mainPhoto = filterFormContainer.querySelector('.filter-image-preview');
 var isFilterFormOpened;
 
 var ESCAPE_KEY = 27;
@@ -34,6 +33,6 @@ filterFormContainer.addEventListener('keydown', function (event) {
   }
 });
 
-initializeFilters();
+window.initializeFilters();
 
-initializeScale(scaleContainer, 25, 100);
+window.initializeScale(scaleContainer, 25, 100);
