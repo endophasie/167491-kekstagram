@@ -1,6 +1,6 @@
 'use strict';
 
-window.initializeFilters = function () {
+window.initializeFilters = (function () {
   var formControls = document.querySelector('.upload-filter-controls');
 
   var ENTER_KEY = 13;
@@ -32,4 +32,4 @@ window.initializeFilters = function () {
         setMainPhotoFilter(filterName);
     }
   }, true);
-};
+})();

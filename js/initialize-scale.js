@@ -1,6 +1,6 @@
 'use strict';
 
-window.initializeScale = function (container, step, defaultVal) {
+window.initializeScale = (function (container, step, defaultVal) {
   var mainPhoto = document.querySelector('.filter-image-preview');
   var dec = container.querySelector('.upload-resize-controls-button-dec');
   var inc = container.querySelector('.upload-resize-controls-button-inc');
@@ -35,4 +35,4 @@ window.initializeScale = function (container, step, defaultVal) {
 
   dec.addEventListener('click', changeVal);
   inc.addEventListener('click', changeVal);
-};
+})(document.querySelector('.upload-resize-controls'), 25, 100);
