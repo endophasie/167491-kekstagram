@@ -24,11 +24,7 @@ window.initializeScale = (function (container, step, defaultVal) {
       }
     }
 
-    if (defaultVal === max) {
-      mainPhoto.style.transform = 'scale(1)';
-    } else {
-      mainPhoto.style.transform = 'scale(0.' + defaultVal + ')';
-    }
+    mainPhoto.style.transform = 'scale(' + defaultVal / 100 + ')';
 
     resizeField.value = defaultVal + '%';
   };
