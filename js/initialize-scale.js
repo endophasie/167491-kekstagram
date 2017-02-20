@@ -1,7 +1,12 @@
 'use strict';
 
-window.initializeScale = function (container, step, defaultVal) {
+var adjustScale = function (scale) {
   var mainPhoto = document.querySelector('.filter-image-preview');
+
+  mainPhoto.style.transform = 'scale(' + scale / 100 + ')';
+};
+
+window.initializeScale = (function (container, scaleFunction) {
   var dec = container.querySelector('.upload-resize-controls-button-dec');
   var inc = container.querySelector('.upload-resize-controls-button-inc');
   var resizeField = container.querySelector('.upload-resize-controls-value');
@@ -9,9 +14,12 @@ window.initializeScale = function (container, step, defaultVal) {
   var changeVal = function () {
     var min = 25;
     var max = 100;
+    var step = 25;
+    var defaultVal = 100;
 
     if (event.target === dec) {
       defaultVal = defaultVal - step;
+
       if (defaultVal < min) {
         defaultVal = min;
       }
@@ -24,15 +32,11 @@ window.initializeScale = function (container, step, defaultVal) {
       }
     }
 
-    if (defaultVal === max) {
-      mainPhoto.style.transform = 'scale(1)';
-    } else {
-      mainPhoto.style.transform = 'scale(0.' + defaultVal + ')';
-    }
+    scaleFunction(defaultVal);
 
     resizeField.value = defaultVal + '%';
   };
 
   dec.addEventListener('click', changeVal);
   inc.addEventListener('click', changeVal);
-};
+})(document.querySelector('.upload-resize-controls'), adjustScale);
