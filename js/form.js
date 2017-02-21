@@ -17,9 +17,9 @@
     mainPhoto.style.transform = 'scale(' + scale / 100 + ')';
   };
 
-  var applyFilter = function (name) {
-    mainPhoto.classList = '';
-    mainPhoto.classList.add('filter-image-preview', name);
+  var applyFilter = function (oldFilter, newFilter) {
+    mainPhoto.classList.remove(oldFilter);
+    mainPhoto.classList.add(newFilter);
   };
 
   var changeForms = function () {

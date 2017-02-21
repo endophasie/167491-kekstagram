@@ -3,6 +3,7 @@
 window.initializeFilters = (function () {
   var initializeFilters = function (setFilter) {
     var formControls = document.querySelector('.upload-filter-controls');
+    var oldFilter;
 
     var ENTER_KEY = 13;
 
@@ -11,7 +12,8 @@ window.initializeFilters = (function () {
         var radioName = event.target.id;
         radioName = radioName.replace('upload-', '');
 
-        setFilter(radioName);
+        setFilter(oldFilter, radioName);
+        oldFilter = radioName;
       }
     }, true);
 
@@ -23,7 +25,8 @@ window.initializeFilters = (function () {
 
           filterName = filterName.replace('upload-', '');
           radioFilter.setAttribute('checked', 'checked');
-          setFilter(filterName);
+          setFilter(oldFilter, filterName);
+          oldFilter = filterName;
       }
     }, true);
   };
