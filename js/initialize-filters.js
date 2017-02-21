@@ -9,27 +9,40 @@ var applyFilter = function (name) {
   mainPhotoFilter.classList.add('filter-image-preview', name);
 };
 
-window.initializeFilters = (function (filterFunction) {
-  var formControls = document.querySelector('.upload-filter-controls');
+window.initializeFilters = (function () {
+  var initializeFilters = function () {
+    var formControls = document.querySelector('.upload-filter-controls');
 
-  var ENTER_KEY = 13;
+    var ENTER_KEY = 13;
 
-  formControls.addEventListener('click', function (event) {
-    if (event.target.getAttribute('name', 'upload-filter')) {
-      var radioName = event.target.id;
+    var setMainPhotoFilter = function (name) {
+      var mainPhotoFilter = document.querySelector('.filter-image-preview');
 
-      filterFunction(radioName);
-    }
-  }, true);
+      name = name.replace('upload-', '');
 
-  formControls.addEventListener('keydown', function (event) {
-    switch (event.keyCode) {
-      case ENTER_KEY :
-        var filterName = event.target.getAttribute('for');
-        var radioFilter = formControls.querySelector('#' + filterName);
+      mainPhotoFilter.classList = '';
+      mainPhotoFilter.classList.add('filter-image-preview', name);
+    };
 
-        radioFilter.setAttribute('checked', true);
-        filterFunction(filterName);
-    }
-  }, true);
-})(applyFilter);
+    formControls.addEventListener('click', function (event) {
+      if (event.target.getAttribute('name', 'upload-filter')) {
+        var radioName = event.target.id;
+
+        setMainPhotoFilter(radioName);
+      }
+    }, true);
+
+    formControls.addEventListener('keydown', function (event) {
+      switch (event.keyCode) {
+        case ENTER_KEY :
+          var filterName = event.target.getAttribute('for');
+          var radioFilter = formControls.querySelector('#' + filterName);
+
+          radioFilter.setAttribute('checked', true);
+          setMainPhotoFilter(filterName);
+      }
+    }, true);
+  };
+
+  return initializeFilters;
+})();

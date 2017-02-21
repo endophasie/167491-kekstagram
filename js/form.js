@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var uploadControls = document.querySelector('.upload-resize-controls');
   var uploadForm = document.querySelector('#upload-select-image');
   var uploadField = uploadForm.querySelector('#upload-file');
   var filterFormContainer = document.querySelector('.upload-overlay');
@@ -32,4 +33,7 @@
         changeForms();
     }
   });
+
+  window.initializeFilters();
+  window.initializeScale(uploadControls, 25, 100);
 })();
