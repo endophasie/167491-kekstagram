@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  var uploadControls = document.querySelector('.upload-resize-controls');
+  var scaleElement = document.querySelector('.upload-resize-controls');
+  var mainPhoto = document.querySelector('.filter-image-preview');
   var uploadForm = document.querySelector('#upload-select-image');
   var uploadField = uploadForm.querySelector('#upload-file');
   var filterFormContainer = document.querySelector('.upload-overlay');
@@ -9,6 +10,17 @@
   var isFilterFormOpened;
 
   var ESCAPE_KEY = 27;
+  var SCALE_STEP = 25;
+  var INITIAL_SCALE = 100;
+
+  var adjustScale = function (scale) {
+    mainPhoto.style.transform = 'scale(' + scale / 100 + ')';
+  };
+
+  var applyFilter = function (oldFilter, newFilter) {
+    mainPhoto.classList.remove(oldFilter);
+    mainPhoto.classList.add(newFilter);
+  };
 
   var changeForms = function () {
     if (isFilterFormOpened) {
@@ -34,6 +46,6 @@
     }
   });
 
-  window.initializeFilters();
-  window.initializeScale(uploadControls, 25, 100);
+  window.initializeFilters(applyFilter);
+  window.initializeScale(scaleElement, SCALE_STEP, INITIAL_SCALE, adjustScale);
 })();

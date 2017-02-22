@@ -1,25 +1,19 @@
 'use strict';
 
 window.initializeFilters = (function () {
-  var initializeFilters = function () {
+  var initializeFilters = function (setFilter) {
     var formControls = document.querySelector('.upload-filter-controls');
+    var oldFilter;
 
     var ENTER_KEY = 13;
-
-    var setMainPhotoFilter = function (name) {
-      var mainPhotoFilter = document.querySelector('.filter-image-preview');
-
-      name = name.replace('upload-', '');
-
-      mainPhotoFilter.classList = '';
-      mainPhotoFilter.classList.add('filter-image-preview', name);
-    };
 
     formControls.addEventListener('click', function (event) {
       if (event.target.getAttribute('name', 'upload-filter')) {
         var radioName = event.target.id;
+        radioName = radioName.replace('upload-', '');
 
-        setMainPhotoFilter(radioName);
+        setFilter(oldFilter, radioName);
+        oldFilter = radioName;
       }
     }, true);
 
@@ -29,8 +23,10 @@ window.initializeFilters = (function () {
           var filterName = event.target.getAttribute('for');
           var radioFilter = formControls.querySelector('#' + filterName);
 
-          radioFilter.setAttribute('checked', true);
-          setMainPhotoFilter(filterName);
+          filterName = filterName.replace('upload-', '');
+          radioFilter.setAttribute('checked', 'checked');
+          setFilter(oldFilter, filterName);
+          oldFilter = filterName;
       }
     }, true);
   };
