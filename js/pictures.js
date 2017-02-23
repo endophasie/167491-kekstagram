@@ -6,14 +6,14 @@ window.pictures = (function () {
 
   var ENTER_KEY = 13;
 
-  var onLoad = function (data) {
+  var onLoad = function (sortedPictures) {
     var blockPictures = document.querySelector('.pictures');
     var tmplPicture = document.querySelector('#picture-template');
     var contentPicture = tmplPicture.content.querySelector('.picture');
 
-    pictures = data;
+    blockPictures.innerHTML = '';
 
-    pictures.forEach(function (picture) {
+    sortedPictures.forEach(function (picture) {
       var elementPicture = contentPicture.cloneNode(true);
       var pictureImg = elementPicture.children[0];
       var pictureLikes = elementPicture.querySelector('.picture-likes');
@@ -38,5 +38,38 @@ window.pictures = (function () {
     });
   };
 
-  window.load(DATA_URL, onLoad);
+  var onLoadFilters = function (data) {
+    var blockFilters = document.querySelector('.filters');
+
+    function shuffle(a, b) {
+      return Math.random() - 0.5;
+    }
+
+    function sortCommentsDec (a, b) {
+      return b.comments.length - a.comments.length;
+    }
+
+    pictures = data;
+    blockFilters.classList.remove('hidden');
+    onLoad(pictures);
+
+    blockFilters.addEventListener('click', function (event) {
+      switch (event.target.id) {
+        case 'filter-popular' :
+          onLoad(pictures);
+          break;
+        case 'filter-new' :
+          var newPictures = pictures.slice().sort(shuffle).slice(0, 11);
+          onLoad(newPictures);
+          break;
+        case 'filter-discussed' :
+          var discussedPictures = pictures.slice().sort(sortCommentsDec);
+          onLoad(discussedPictures);
+          break;
+      }
+    }, true);
+  };
+
+  window.load(DATA_URL, onLoadFilters);
+
 })();
