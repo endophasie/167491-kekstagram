@@ -8,7 +8,7 @@ window.load = (function () {
   return function (url, callback, onError) {
     var xhr = new XMLHttpRequest();
 
-    if(typeof onError === 'function') {
+    if (typeof onError === 'function') {
       errorHandler = onError;
     }
 

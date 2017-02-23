@@ -45,7 +45,7 @@ window.pictures = (function () {
       return Math.random() - 0.5;
     }
 
-    function sortCommentsDec (a, b) {
+    function sortCommentsDec(a, b) {
       return b.comments.length - a.comments.length;
     }
 
