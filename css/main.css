@@ -659,6 +659,10 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   cursor: pointer;
 }
 
+gallery-overlay-close:focus {
+  outline: 1px solid deepskyblue;
+}
+
 .gallery-overlay-preview {
   display: inline-block;
   margin: 30px 0;
