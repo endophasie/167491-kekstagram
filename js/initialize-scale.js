@@ -34,5 +34,5 @@ window.initializeScale = (function () {
 
     dec.addEventListener('click', changeVal);
     inc.addEventListener('click', changeVal);
-  }
+  };
 })();
