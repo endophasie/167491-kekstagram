@@ -6,7 +6,35 @@ window.pictures = (function () {
 
   var ENTER_KEY = 13;
 
-  var onLoad = function (sortedPictures) {
+  var onLoadFilters = function (data) {
+    pictures = data;
+    showFilters();
+    renderPictures(pictures);
+  };
+
+  var showFilters = function () {
+    var blockFilters = document.querySelector('.filters');
+
+    blockFilters.classList.remove('hidden');
+
+    blockFilters.addEventListener('click', function (event) {
+      switch (event.target.id) {
+        case 'filter-popular' :
+          renderPictures(pictures);
+          break;
+        case 'filter-new' :
+          var newPictures = pictures.slice().sort(window.arrayUtils.shuffle).slice(0, 11);
+          renderPictures(newPictures);
+          break;
+        case 'filter-discussed' :
+          var discussedPictures = pictures.slice().sort(window.arrayUtils.sortCommentsDec);
+          renderPictures(discussedPictures);
+          break;
+      }
+    }, true);
+  };
+
+  var renderPictures = function (sortedPictures) {
     var blockPictures = document.querySelector('.pictures');
     var tmplPicture = document.querySelector('#picture-template');
     var contentPicture = tmplPicture.content.querySelector('.picture');
@@ -36,38 +64,6 @@ window.pictures = (function () {
         }
       });
     });
-  };
-
-  var onLoadFilters = function (data) {
-    var blockFilters = document.querySelector('.filters');
-
-    function shuffle(a, b) {
-      return Math.random() - 0.5;
-    }
-
-    function sortCommentsDec(a, b) {
-      return b.comments.length - a.comments.length;
-    }
-
-    pictures = data;
-    blockFilters.classList.remove('hidden');
-    onLoad(pictures);
-
-    blockFilters.addEventListener('click', function (event) {
-      switch (event.target.id) {
-        case 'filter-popular' :
-          onLoad(pictures);
-          break;
-        case 'filter-new' :
-          var newPictures = pictures.slice().sort(shuffle).slice(0, 11);
-          onLoad(newPictures);
-          break;
-        case 'filter-discussed' :
-          var discussedPictures = pictures.slice().sort(sortCommentsDec);
-          onLoad(discussedPictures);
-          break;
-      }
-    }, true);
   };
 
   window.load(DATA_URL, onLoadFilters);
