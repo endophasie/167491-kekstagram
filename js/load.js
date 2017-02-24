@@ -2,7 +2,7 @@
 
 window.load = (function () {
   var errorHandler = function (err) {
-    throw new ReadError(err);
+    throw new Error(err);
   };
 
   return function (url, callback, onError) {
