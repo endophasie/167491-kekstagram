@@ -6,7 +6,7 @@ window.pictures = (function () {
 
   var ENTER_KEY = 13;
 
-  var onLoadFilters = function (data) {
+  var onLoadPictures = function (data) {
     pictures = data;
     showFilters();
     renderPictures(pictures);
@@ -66,6 +66,6 @@ window.pictures = (function () {
     });
   };
 
-  window.load(DATA_URL, onLoadFilters);
+  window.load(DATA_URL, onLoadPictures);
 
 })();

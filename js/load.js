@@ -2,10 +2,10 @@
 
 window.load = (function () {
   var errorHandler = function (err) {
-    throw new Error(err);
+    console.log(err);
   };
 
-  return function (url, callback, onError) {
+  return function (url, onLoad, onError) {
     var xhr = new XMLHttpRequest();
 
     if (typeof onError === 'function') {
@@ -16,7 +16,7 @@ window.load = (function () {
       if (event.target.status >= 400) {
         errorHandler('Failed to load data. Server returned status: ' + event.target.status);
       } else if (event.target.status >= 200) {
-        callback(event.target.response);
+        onLoad(event.target.response);
       }
     });
 
