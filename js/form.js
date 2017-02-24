@@ -12,6 +12,7 @@
   var ESCAPE_KEY = 27;
   var SCALE_STEP = 25;
   var INITIAL_SCALE = 100;
+  var DEFAULT_SATURATION = 100;
 
   var adjustScale = function (scale) {
     mainPhoto.style.transform = 'scale(' + scale / 100 + ')';
@@ -20,6 +21,14 @@
   var applyFilter = function (oldFilter, newFilter) {
     mainPhoto.classList.remove(oldFilter);
     mainPhoto.classList.add(newFilter);
+  };
+
+  var saturatePic = function (val) {
+    if (val === 'underfined') {
+      val = DEFAULT_SATURATION;
+    }
+
+    mainPhoto.style.filter = 'saturate(' + val / 100 + ')';
   };
 
   var changeForms = function () {
@@ -46,6 +55,6 @@
     }
   });
 
-  window.initializeFilters(applyFilter);
+  window.initializeFilters(applyFilter, saturatePic);
   window.initializeScale(scaleElement, SCALE_STEP, INITIAL_SCALE, adjustScale);
 })();
