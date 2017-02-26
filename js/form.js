@@ -8,10 +8,12 @@
   var filterFormContainer = document.querySelector('.upload-overlay');
   var closeFilterForm = filterFormContainer.querySelector('.upload-form-cancel');
   var isFilterFormOpened;
+  var currentFilter = 'filter-none';
 
   var ESCAPE_KEY = 27;
   var SCALE_STEP = 25;
   var INITIAL_SCALE = 100;
+  var FILTER_LEVEL_WIDTH = 455;
 
   var adjustScale = function (scale) {
     mainPhoto.style.transform = 'scale(' + scale / 100 + ')';
@@ -20,6 +22,29 @@
   var applyFilter = function (oldFilter, newFilter) {
     mainPhoto.classList.remove(oldFilter);
     mainPhoto.classList.add(newFilter);
+    currentFilter = newFilter;
+  };
+
+  var filterLevelPhoto = function (filterVal) {
+    switch (currentFilter) {
+      case 'filter-chrome' :
+        mainPhoto.style.filter = 'grayscale(' + (filterVal / FILTER_LEVEL_WIDTH).toFixed(2) + ')';
+        break;
+      case 'filter-sepia' :
+        mainPhoto.style.filter = 'sepia(' + (filterVal / FILTER_LEVEL_WIDTH).toFixed(2) + ')';
+        break;
+      case 'filter-marvin' :
+        mainPhoto.style.filter = 'invert(' + Math.floor(filterVal / FILTER_LEVEL_WIDTH * 100) + '%)';
+        break;
+      case 'filter-phobos' :
+        mainPhoto.style.filter = 'contrast(' + Math.max(1, filterVal / 100) + ')' + 'sepia(' + (filterVal / FILTER_LEVEL_WIDTH * 0.3).toFixed(2) + ')';
+        break;
+      case 'filter-heat' :
+        mainPhoto.style.filter = 'brightness(' + Math.max(1, filterVal / 100) + ')' + 'sepia(' + (filterVal / FILTER_LEVEL_WIDTH * 0.5).toFixed(2) + ')';
+        break;
+      default :
+        mainPhoto.style.filter = 'none';
+    }
   };
 
   var changeForms = function () {
@@ -46,6 +71,6 @@
     }
   });
 
-  window.initializeFilters(applyFilter);
+  window.initializeFilters(applyFilter, filterLevelPhoto);
   window.initializeScale(scaleElement, SCALE_STEP, INITIAL_SCALE, adjustScale);
 })();

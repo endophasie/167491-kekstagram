@@ -16,16 +16,9 @@ window.initializeScale = (function () {
       var max = 100;
 
       if (event.target === dec) {
-        currentVal = currentVal - step;
-        if (currentVal < min) {
-          currentVal = min;
-        }
+        currentVal = Math.max(currentVal - step, min);
       } else if (event.target === inc) {
-        currentVal = currentVal + step;
-
-        if (currentVal > max) {
-          currentVal = max;
-        }
+        currentVal = Math.min(currentVal + step, max);
       }
 
       scaleFunction(currentVal);
