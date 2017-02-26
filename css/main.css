@@ -131,12 +131,12 @@ body {
 
  .upload-filter-label-phobos .upload-filter-preview,
  .filter-phobos {
-   filter: contrast(1.6) grayscale(1) sepia(0.3);
+   filter: contrast(1.6) sepia(0.3);
  }
 
 .upload-filter-label-heat .upload-filter-preview,
 .filter-heat {
-  filter: brightness(1.2) opacity(0.8) sepia(0.5);
+  filter: brightness(1.2) sepia(0.5);
 }
 
 .upload-input {

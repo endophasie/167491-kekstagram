@@ -8,11 +8,12 @@
   var filterFormContainer = document.querySelector('.upload-overlay');
   var closeFilterForm = filterFormContainer.querySelector('.upload-form-cancel');
   var isFilterFormOpened;
+  var currentFilter = 'filter-none';
 
   var ESCAPE_KEY = 27;
   var SCALE_STEP = 25;
   var INITIAL_SCALE = 100;
-  var DEFAULT_SATURATION = 100;
+  var DEFAULT_FILTER_VAL = 100;
 
   var adjustScale = function (scale) {
     mainPhoto.style.transform = 'scale(' + scale / 100 + ')';
@@ -21,14 +22,31 @@
   var applyFilter = function (oldFilter, newFilter) {
     mainPhoto.classList.remove(oldFilter);
     mainPhoto.classList.add(newFilter);
+    currentFilter = newFilter;
   };
 
-  var saturatePic = function (val) {
-    if (val === 'underfined') {
-      val = DEFAULT_SATURATION;
+  var filterLevelPhoto = function (filterVal) {
+    if (isNaN(filterVal)) {
+      filterVal = DEFAULT_FILTER_VAL;
     }
 
-    mainPhoto.style.filter = 'saturate(' + val / 100 + ')';
+    switch (currentFilter) {
+      case 'filter-chrome' :
+        mainPhoto.style.filter = 'grayscale(' + (filterVal / 455).toFixed(2) + ')';
+        break;
+      case 'filter-sepia' :
+        mainPhoto.style.filter = 'sepia(' + (filterVal / 455).toFixed(2) + ')';
+        break;
+      case 'filter-marvin' :
+        mainPhoto.style.filter = 'invert(' + Math.floor(filterVal / 455 * 100) + '%)';
+        break;
+      case 'filter-phobos' :
+        mainPhoto.style.filter = 'contrast(' + Math.max(1, filterVal / 100) + ')' + 'sepia(' + (filterVal / 455 * 0.3).toFixed(2) + ')';
+        break;
+      case 'filter-heat' :
+        mainPhoto.style.filter = 'brightness(' + Math.max(1, filterVal / 100) + ')' + 'sepia(' + (filterVal / 455 * 0.5).toFixed(2) + ')';
+        break;
+    }
   };
 
   var changeForms = function () {
@@ -55,6 +73,6 @@
     }
   });
 
-  window.initializeFilters(applyFilter, saturatePic);
+  window.initializeFilters(applyFilter, filterLevelPhoto);
   window.initializeScale(scaleElement, SCALE_STEP, INITIAL_SCALE, adjustScale);
 })();
