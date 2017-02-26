@@ -1,13 +1,14 @@
 'use strict';
 
 window.initializeFilters = (function () {
-  var initializeFilters = function (setFilter, setSaturation) {
+  var initializeFilters = function (setFilter, setFilterLevel) {
     var formControls = document.querySelector('.upload-filter-controls');
     var filterLevel = formControls.querySelector('.upload-filter-level');
     var filterLevelLine = filterLevel.querySelector('.upload-filter-level-line');
     var filterLevelPin = filterLevel.querySelector('.upload-filter-level-pin');
     var filterLevelVal = filterLevel.querySelector('.upload-filter-level-val');
     var oldFilter = 'filter-none';
+    var levelVal = 100;
 
     var ENTER_KEY = 13;
 
@@ -28,6 +29,7 @@ window.initializeFilters = (function () {
 
         setFilter(oldFilter, radioName);
         showFilterLevel(radioName);
+        setFilterLevel(levelVal);
         oldFilter = radioName;
       }
     }, true);
@@ -42,6 +44,7 @@ window.initializeFilters = (function () {
           radioFilter.setAttribute('checked', 'checked');
           setFilter(oldFilter, filterName);
           showFilterLevel(filterName);
+          setFilterLevel(levelVal);
           oldFilter = filterName;
       }
     }, true);
@@ -60,12 +63,12 @@ window.initializeFilters = (function () {
           x: startPoint.x - moveEvent.clientX
         };
 
-        var filterVal = filterLevelPin.offsetLeft - shift.x;
+        levelVal = filterLevelPin.offsetLeft - shift.x;
 
-        filterLevelPin.style.left = Math.max(0, filterVal) && Math.min(filterLevelLine.clientWidth, filterVal) + 'px';
+        filterLevelPin.style.left = Math.max(0, levelVal) && Math.min(filterLevelLine.clientWidth, levelVal) + 'px';
         filterLevelVal.style.width = filterLevelPin.style.left;
 
-        setSaturation(filterVal);
+        setFilterLevel(levelVal);
 
         startPoint = {
           x: moveEvent.clientX

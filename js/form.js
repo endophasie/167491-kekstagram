@@ -13,7 +13,6 @@
   var ESCAPE_KEY = 27;
   var SCALE_STEP = 25;
   var INITIAL_SCALE = 100;
-  var DEFAULT_FILTER_VAL = 100;
 
   var adjustScale = function (scale) {
     mainPhoto.style.transform = 'scale(' + scale / 100 + ')';
@@ -26,10 +25,6 @@
   };
 
   var filterLevelPhoto = function (filterVal) {
-    if (isNaN(filterVal)) {
-      filterVal = DEFAULT_FILTER_VAL;
-    }
-
     switch (currentFilter) {
       case 'filter-chrome' :
         mainPhoto.style.filter = 'grayscale(' + (filterVal / 455).toFixed(2) + ')';
@@ -46,6 +41,8 @@
       case 'filter-heat' :
         mainPhoto.style.filter = 'brightness(' + Math.max(1, filterVal / 100) + ')' + 'sepia(' + (filterVal / 455 * 0.5).toFixed(2) + ')';
         break;
+      default :
+        mainPhoto.style.filter = 'none';
     }
   };
 
