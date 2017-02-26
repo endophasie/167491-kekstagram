@@ -12,7 +12,11 @@ window.initializeFilters = (function () {
     var ENTER_KEY = 13;
 
     var showFilterLevel = function (currentFilterName) {
-      currentFilterName === 'filter-none' ? filterLevel.classList.add('invisible') : filterLevel.classList.remove('invisible');
+      if (currentFilterName === 'filter-none') {
+        filterLevel.classList.add('invisible')
+      } else {
+        filterLevel.classList.remove('invisible');
+      }
     };
 
     showFilterLevel(oldFilter);
