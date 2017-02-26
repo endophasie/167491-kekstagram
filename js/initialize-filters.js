@@ -13,7 +13,7 @@ window.initializeFilters = (function () {
 
     var showFilterLevel = function (currentFilterName) {
       if (currentFilterName === 'filter-none') {
-        filterLevel.classList.add('invisible')
+        filterLevel.classList.add('invisible');
       } else {
         filterLevel.classList.remove('invisible');
       }
