@@ -7,6 +7,7 @@
   var uploadField = uploadForm.querySelector('#upload-file');
   var filterFormContainer = document.querySelector('.upload-overlay');
   var closeFilterForm = filterFormContainer.querySelector('.upload-form-cancel');
+  var filterLevelWidth = filterFormContainer.querySelector('.upload-filter-level-line').clientWidth;
   var isFilterFormOpened;
   var currentFilter = 'filter-none';
 
@@ -27,19 +28,19 @@
   var filterLevelPhoto = function (filterVal) {
     switch (currentFilter) {
       case 'filter-chrome' :
-        mainPhoto.style.filter = 'grayscale(' + (filterVal / 455).toFixed(2) + ')';
+        mainPhoto.style.filter = 'grayscale(' + (filterVal / filterLevelWidth).toFixed(2) + ')';
         break;
       case 'filter-sepia' :
-        mainPhoto.style.filter = 'sepia(' + (filterVal / 455).toFixed(2) + ')';
+        mainPhoto.style.filter = 'sepia(' + (filterVal / filterLevelWidth).toFixed(2) + ')';
         break;
       case 'filter-marvin' :
-        mainPhoto.style.filter = 'invert(' + Math.floor(filterVal / 455 * 100) + '%)';
+        mainPhoto.style.filter = 'invert(' + Math.floor(filterVal / filterLevelWidth * 100) + '%)';
         break;
       case 'filter-phobos' :
-        mainPhoto.style.filter = 'contrast(' + Math.max(1, filterVal / 100) + ')' + 'sepia(' + (filterVal / 455 * 0.3).toFixed(2) + ')';
+        mainPhoto.style.filter = 'contrast(' + Math.max(1, filterVal / 100) + ')' + 'sepia(' + (filterVal / filterLevelWidth * 0.3).toFixed(2) + ')';
         break;
       case 'filter-heat' :
-        mainPhoto.style.filter = 'brightness(' + Math.max(1, filterVal / 100) + ')' + 'sepia(' + (filterVal / 455 * 0.5).toFixed(2) + ')';
+        mainPhoto.style.filter = 'brightness(' + Math.max(1, filterVal / 100) + ')' + 'sepia(' + (filterVal / filterLevelWidth * 0.5).toFixed(2) + ')';
         break;
       default :
         mainPhoto.style.filter = 'none';
