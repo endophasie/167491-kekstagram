@@ -9,7 +9,21 @@ window.pictures = (function () {
   var onLoadPictures = function (data) {
     pictures = data;
     showFilters();
-    renderPictures(pictures);
+    loadRenderPictures();
+  };
+
+  var loadRenderPictures = function (arrayPic) {
+    var blockPictures = document.querySelector('.pictures');
+    var fragment = document.createDocumentFragment();
+    var arrayToRender = arrayPic || pictures;
+
+    blockPictures.innerHTML = '';
+
+    arrayToRender.forEach(function (it) {
+      fragment.appendChild(renderPictures(it));
+    });
+
+    blockPictures.appendChild(fragment);
   };
 
   var showFilters = function () {
@@ -20,28 +34,27 @@ window.pictures = (function () {
     blockFilters.addEventListener('click', function (event) {
       switch (event.target.id) {
         case 'filter-popular' :
-          renderPictures(pictures);
+          loadRenderPictures();
           break;
         case 'filter-new' :
           var newPictures = pictures.slice().sort(window.arrayUtils.shuffle).slice(0, 11);
-          renderPictures(newPictures);
+
+          loadRenderPictures(newPictures);
           break;
         case 'filter-discussed' :
           var discussedPictures = pictures.slice().sort(window.arrayUtils.sortCommentsDec);
-          renderPictures(discussedPictures);
+
+          loadRenderPictures(discussedPictures);
           break;
       }
     }, true);
   };
 
-  var renderPictures = function (sortedPictures) {
-    var blockPictures = document.querySelector('.pictures');
+  var renderPictures = (function () {
     var tmplPicture = document.querySelector('#picture-template');
     var contentPicture = tmplPicture.content.querySelector('.picture');
 
-    blockPictures.innerHTML = '';
-
-    sortedPictures.forEach(function (picture) {
+    return function (picture) {
       var elementPicture = contentPicture.cloneNode(true);
       var pictureImg = elementPicture.children[0];
       var pictureLikes = elementPicture.querySelector('.picture-likes');
@@ -50,21 +63,23 @@ window.pictures = (function () {
       pictureImg.setAttribute('src', picture.url);
       pictureLikes.innerText = picture.likes;
       picturesComments.innerText = picture.comments.length;
-      blockPictures.appendChild(elementPicture);
 
       elementPicture.addEventListener('click', function (event) {
         event.preventDefault();
 
         window.showGallery(picture);
       });
+
       elementPicture.addEventListener('keydown', function (event) {
         switch (event.keyCode) {
           case ENTER_KEY :
             window.showGallery(picture);
         }
       });
-    });
-  };
+
+      return elementPicture;
+    };
+  })();
 
   window.load(DATA_URL, onLoadPictures);
 
